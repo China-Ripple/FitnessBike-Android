@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp" >
+
+    <LinearLayout
+        android:id="@+id/back"
+        style="@style/ListBackContent"
+        android:background="@android:color/black"
+        android:tag="back" >
+
+        <Button
+            android:id="@+id/example_row_b_action_1"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PK" />
+
+        <Button
+            android:id="@+id/example_row_b_action_2"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/example_row_b_action_3"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消息" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/front"
+        style="@style/ListFrontContent"
+        android:background="@android:color/black"
+        android:tag="front" >
+
+        <LinearLayout
+            android:id="@+id/ivNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/ivNumberOfImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/first" />
+
+            <TextView
+                android:id="@+id/ivNumberOfText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/first"
+                android:textColor="@color/sea_blue"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <com.signalripple.fitnessbike.view.CircleImageView
+            android:id="@+id/ivHead"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/ivNumber"
+            android:maxHeight="45dp"
+            android:maxWidth="45dp"
+            android:src="@drawable/xianjian03" />
+
+        <LinearLayout
+            android:id="@+id/nameInfoLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@id/ivHead"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宁泽寿"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/txtDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.3km"
+                android:textColor="@color/sea_blue" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivZan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="22dp"
+            android:src="@drawable/zan_normal" />
+
+        <TextView
+            android:id="@+id/txtZanNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="1"
+            android:textColor="@color/sea_blue"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</FrameLayout>

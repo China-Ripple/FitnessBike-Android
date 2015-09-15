@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 中海蓝色 -->
+    <color name="sea_blue">#32cd99</color>
+    <!-- 石板蓝 -->
+    <color name="store_blue">#007FFF</color>
+</resources>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!--
+        <include
+        android:id="@+id/include_view_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        layout="@layout/titlebar" />
+    -->
+
+    <TextView
+        android:id="@+id/activity_main_tv_appname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_main_appname_margin_top"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/app_name"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/activity_main_appname_size" />
+
+    <Button
+        android:id="@+id/activity_main_btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_large"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_large"
+        android:background="@drawable/button_general_selector"
+        android:text="@string/string_register"
+        android:textSize="@dimen/activity_textview_size" />
+
+    <Button
+        android:id="@+id/activity_main_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_main_btn_register"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_large"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_large"
+        android:layout_marginTop="@dimen/activity_main_button_margin_top"
+        android:background="@drawable/button_general_selector"
+        android:text="@string/string_login"
+        android:textSize="@dimen/activity_textview_size" />
+
+    <RelativeLayout
+        android:id="@+id/activity_main_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/activity_main_bottom_margin_top"
+        android:layout_marginTop="@dimen/activity_main_bottom_margin_top" >
+
+        <ImageButton
+            android:id="@+id/activity_main_login_wx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/icon_weixin" />
+
+        <ImageButton
+            android:id="@+id/activity_main_login_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/activity_main_login_wx"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_large"
+            android:background="@drawable/icon_qq" />
+
+        <ImageButton
+            android:id="@+id/activity_main_login_wb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/activity_main_login_wx"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_large"
+            android:background="@drawable/icon_weibo" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/activity_main_bottom_bar"
+        android:gravity="center_horizontal"
+        android:text="@string/string_thirder_login"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/activity_main_thirt_login_size" />
+
+</RelativeLayout>

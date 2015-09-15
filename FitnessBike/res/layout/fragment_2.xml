@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res/com.signalripple.fitnessbike"
+    xmlns:app="http://schemas.android.com/apk/res/com.signalripple.fitnessbike"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_person" >
+
+    <RelativeLayout
+        android:id="@+id/headlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" >
+
+        <com.signalripple.fitnessbike.view.RoundProgressBar
+            android:id="@+id/roundProgressBar"
+            android:layout_width="80dip"
+            android:layout_height="80dip"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="78dp"
+            android_custom:roundColor="#D1D1D1"
+            android_custom:roundProgressColor="@android:color/black"
+            android_custom:roundWidth="10dip"
+            android_custom:textColor="#9A32CD"
+            android_custom:textIsDisplayable="false"
+            android_custom:textSize="18sp" />
+
+        <com.signalripple.fitnessbike.view.CircleImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/xianjian02"
+            app:border_color="@android:color/holo_blue_light"
+            app:border_width="2dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headlayout"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/string_rongtai"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txtNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:text="@string/string_number"
+        android:textColor="@color/sea_blue" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/txtNumber"
+        android:layout_below="@id/txtName"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@id/txtNumber"
+        android:src="@drawable/number_detail" />
+
+    <!-- 今日燃烧，总量，最高纪录等的布局 -->
+
+    <RelativeLayout
+        android:id="@+id/informationLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtNumber"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/black"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_today_number"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/fragment_person_info_layout_textview_size" />
+
+            <TextView
+                android:id="@+id/txtToadyNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="128 cal"
+                android:textColor="@color/sea_blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_all_number"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/fragment_person_info_layout_textview_size" />
+
+            <TextView
+                android:id="@+id/txtAllNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22302 cal"
+                android:textColor="@color/sea_blue" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/string_max_recorder_number"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/fragment_person_info_layout_textview_size" />
+
+            <TextView
+                android:id="@+id/txtMaxRecorderNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="220 cal"
+                android:textColor="@color/sea_blue" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.signalripple.fitnessbike.view.ChartView
+        android:id="@+id/chartview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/informationLayout"
+         >
+    </com.signalripple.fitnessbike.view.ChartView>
+
+    
+    <RadioGroup 
+        android:id="@+id/radiogroup"
+        android:layout_height="50dp"
+        android:layout_width="220dp"
+		android:background="@android:color/black"  
+		android:layout_alignParentBottom="true"
+		android:layout_marginBottom="10dp"
+		android:layout_centerHorizontal="true"
+		android:gravity="center"
+		android:orientation="horizontal"
+		android:padding="5dp"
+        >
+        <RadioButton 
+            android:id="@+id/rbDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:layout_weight="1"
+            android:background="@drawable/bg_buttons"
+            android:text="里   程"
+            android:textColor="@color/sea_blue"
+            android:gravity="center_horizontal|center_vertical"
+            />
+        <RadioButton 
+            android:id="@+id/rbCalori"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="卡路里"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:gravity="center_horizontal|center_vertical"
+            android:button="@null"
+            />
+        
+    </RadioGroup>
+</RelativeLayout>

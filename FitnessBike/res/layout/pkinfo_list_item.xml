@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/black"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp" >
+
+    <LinearLayout
+        android:id="@+id/back"
+        style="@style/ListBackContent"
+        android:background="@android:color/black"
+        android:tag="back" >
+
+        <Button
+            android:id="@+id/example_row_b_action_1"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PK" />
+
+        <Button
+            android:id="@+id/example_row_b_action_2"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/example_row_b_action_3"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消息" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/front"
+        style="@style/ListFrontContent"
+        android:background="@android:color/black"
+        android:tag="front" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/textview_selector_right"
+            android:gravity="center"
+            android:text="@string/refuse"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/textview_selector_left"
+            android:gravity="center"
+            android:text="@string/accept"
+            android:textColor="@color/store_blue"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" >
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宁泽涛"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/txtName"
+                android:text="发起PK"
+                android:textColor="@android:color/darker_gray" />
+
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtName"
+                android:background="@drawable/icon_racing" />
+
+            <TextView
+                android:id="@+id/txtType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtName"
+                android:layout_toRightOf="@id/ivIcon"
+                android:text="@string/racing"
+                android:textColor="@color/sea_blue" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

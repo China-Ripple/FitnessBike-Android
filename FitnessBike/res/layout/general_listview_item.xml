@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp" >
+
+    <LinearLayout
+        android:id="@+id/back"
+        style="@style/ListBackContent"
+        android:background="@android:color/white"
+        android:tag="back" >
+
+        <Button
+            android:id="@+id/example_row_b_action_1"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PK" />
+
+        <Button
+            android:id="@+id/example_row_b_action_2"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/example_row_b_action_3"
+            style="@style/ListButtonAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消息" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/front"
+        style="@style/ListFrontContent"
+        android:background="@android:color/white"
+        android:tag="front" >
+
+        <com.signalripple.fitnessbike.view.CircleImageView
+            android:id="@+id/ivHead"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/xianjian04" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/ivHead"
+            android:layout_alignRight="@id/ivHead"
+            android:layout_below="@id/ivHead"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:text="张泽涛" />
+
+        <Button
+            android:id="@+id/btnAddFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="添加好友" />
+    </RelativeLayout>
+
+</FrameLayout>

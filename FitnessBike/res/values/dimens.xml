@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">0dp</dimen>
+    <dimen name="activity_vertical_margin">0dp</dimen>
+    <dimen name="activity_size_sero">0dp</dimen>
+
+    <!-- add by xushiyong 20150703 start -->
+    <dimen name="activity_horizontal_margin_large">42dp</dimen>
+    <dimen name="activity_horizontal_margin_small">6dp</dimen>
+    <dimen name="activity_vertical_margin_middle">40dp</dimen>
+    <dimen name="activity_main_appname_size">30sp</dimen>
+    <dimen name="activity_main_appname_margin_top">50dp</dimen>
+    <dimen name="activity_main_button_margin_top">10dp</dimen>
+    <dimen name="activity_main_thirt_login_size">14sp</dimen>
+    <dimen name="activity_main_bottom_margin_top">14dp</dimen>
+    <dimen name="activity_titlebar_height">50dp</dimen>
+    <dimen name="activity_margin_padding_lr">10dp</dimen>
+    <dimen name="activity_textview_size">18sp</dimen>
+    <dimen name="activity_register_button_margin_top">45dp</dimen>
+    
+    <dimen name="fragment_person_info_layout_textview_size">12sp</dimen>
+    <!-- add by xushiyong 20150703 end -->
+
+</resources>

@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 public class SplashActivity extends BaseActivity {
 
-	long delay = 2500;
+	long delay = 2000;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class SplashActivity extends BaseActivity {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(SplashActivity.this, MainTabActivity.class);
+				Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
 				startActivity(intent);
 			}
 		}, delay);

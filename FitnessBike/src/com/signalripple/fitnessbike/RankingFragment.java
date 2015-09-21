@@ -103,6 +103,8 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 		
 		btnMessage   = (FrameLayout)view.findViewById(R.id.btnMessage);
 		btnAddFriend = (ImageView)view.findViewById(R.id.btnAddFriend); 
+		
+		rbFriendList.setChecked(true);
 	}
 
 	public void init(){

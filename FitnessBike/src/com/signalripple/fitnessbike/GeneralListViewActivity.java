@@ -19,6 +19,11 @@ import cn.fireup.yuanyang.swipelistview.BaseSwipeListViewListener;
 
 import com.signalripple.fitnessbike.adapter.GeneralListViewAdapter;
 
+/**
+ * 通用ListView
+ * @author xushiyong
+ *
+ */
 public class GeneralListViewActivity extends BaseActivity implements ICommViewListener {
 
 	private PullToRefreshList pullToRefreshList = null;

@@ -41,6 +41,7 @@
         android:tag="front" >
 
         <TextView
+            android:id="@+id/txtRefuse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -52,6 +53,7 @@
             android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/txtAccept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -27,6 +27,7 @@ public class PersonFragment extends Fragment implements OnCheckedChangeListener{
 		radioGroup.setOnCheckedChangeListener(this);
 		rbCalory = (RadioButton)view.findViewById(R.id.rbCalori);
 		rbDistance = (RadioButton)view.findViewById(R.id.rbDistance);
+		rbDistance.setChecked(true);
 		chartOpeartion(view);
 		
 		return view;

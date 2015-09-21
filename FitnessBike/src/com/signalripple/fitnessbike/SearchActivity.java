@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 
 
 public class SearchActivity extends BaseActivity implements OnClickListener {
@@ -40,6 +41,7 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 
 	private void initViews() {
 		// TODO Auto-generated method stub
+		
 		gridview = (GridView)this.findViewById(R.id.gridview);
 		list.add(new SuperBiker());
 		list.add(new SuperBiker());

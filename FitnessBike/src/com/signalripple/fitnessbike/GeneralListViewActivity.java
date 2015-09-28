@@ -3,19 +3,24 @@ package com.signalripple.fitnessbike;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import cn.fireup.yuanyang.adapter.NewsListEntity;
 import cn.fireup.yuanyang.refresh.LoadMoreListView;
 import cn.fireup.yuanyang.refresh.PullToRefreshList;
 import cn.fireup.yuanyang.refresh.PullToRefreshList.ICommViewListener;
 import cn.fireup.yuanyang.swipelistview.BaseSwipeListViewListener;
+import cn.fireup.yuanyang.swipelistview.SwipeListView;
 
 import com.signalripple.fitnessbike.adapter.GeneralListViewAdapter;
 
@@ -24,19 +29,45 @@ import com.signalripple.fitnessbike.adapter.GeneralListViewAdapter;
  * @author xushiyong
  *
  */
-public class GeneralListViewActivity extends BaseActivity implements ICommViewListener {
+public class GeneralListViewActivity extends BaseActivity implements ICommViewListener, OnClickListener {
 
 	private PullToRefreshList pullToRefreshList = null;
 	private LoadMoreListView loadMoreListView=null;
 	private GeneralListViewAdapter adapter;
 	
+	private TextView txtReturn;
+	private TextView txtTitle;
+	private TextView txtRightAction;
+	
+	private String activityTitle;
+	private String type ;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_general_listview);
+		
+		Intent intent = getIntent();
+		activityTitle = intent.getStringExtra("title");
+		type = intent.getStringExtra("type");
+		
 		initViews();
+		initEvent();
+		initValues();
+	}
+
+
+	private void initEvent() {
+		// TODO Auto-generated method stub
+		txtReturn.setOnClickListener(this);
+		txtRightAction.setOnClickListener(this);
+	}
+
+
+	private void initValues() {
+		// TODO Auto-generated method stub
+		txtTitle.setText(activityTitle);
 	}
 
 
@@ -45,10 +76,19 @@ public class GeneralListViewActivity extends BaseActivity implements ICommViewLi
 		pullToRefreshList = (PullToRefreshList)this.findViewById(R.id.loaddataview);
 		pullToRefreshList.setCommViewListener(this);
 		loadMoreListView=pullToRefreshList.getLoadMoreListView();
+		
+		// 设置不能左右滑动
+		loadMoreListView.setSwipeMode(SwipeListView.SWIPE_MODE_NONE);
+		
 		init();
 		adapter = new GeneralListViewAdapter(this);
 		loadMoreListView.setAdapter(adapter);
 		pullToRefreshList.initData();
+		
+		txtReturn = (TextView)this.findViewById(R.id.include_view_btnLeft);
+		txtTitle = (TextView)this.findViewById(R.id.include_view_titlebar_text);
+		txtRightAction = (TextView)this.findViewById(R.id.include_view_btnRight);
+		txtRightAction.setVisibility(View.GONE);
 	}
 
 	public void init(){
@@ -177,5 +217,21 @@ public class GeneralListViewActivity extends BaseActivity implements ICommViewLi
 			arrayList.add(newsListEntity);
 		}
 		return arrayList;
+	}
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.include_view_btnLeft:
+			finish();
+			break;
+		case R.id.include_view_btnRight:
+			
+			break;
+		default:
+			break;
+		}
 	}
 }

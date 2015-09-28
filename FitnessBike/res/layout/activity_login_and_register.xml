@@ -6,15 +6,15 @@
 
     <FrameLayout
         android:id="@+id/companyIcon"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+        android:layout_width="@dimen/login_and_register_top_imagetip_outter_size"
+        android:layout_height="@dimen/login_and_register_top_imagetip_outter_size"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/outter" >
 
         <ImageView
-            android:layout_width="84dp"
-            android:layout_height="84dp"
+            android:layout_width="@dimen/login_and_register_top_imagetip_inner_size"
+            android:layout_height="@dimen/login_and_register_top_imagetip_inner_size"
             android:layout_gravity="center"
             android:background="@drawable/inner" />
     </FrameLayout>
@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/string_login"
+            android:textSize="@dimen/login_and_register_top_textsize"
             android:textColor="@color/sea_blue" />
 
         <TextView
@@ -41,12 +42,15 @@
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
             android:text=" / "
+            android:textSize="@dimen/login_and_register_top_textsize"
             android:textColor="@color/sea_blue" />
 
         <TextView
+            android:id="@+id/txtRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/string_register"
+            android:textSize="@dimen/login_and_register_top_textsize"
             android:textColor="@color/sea_blue" />
     </LinearLayout>
 
@@ -56,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layoutLoginAndRegister"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="@dimen/login_and_register_center_margin_top"
         android:text="@string/thirder_login"
         android:textColor="@android:color/darker_gray" />
 
@@ -72,14 +76,14 @@
             android:id="@+id/ibQQLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="25dp"
             android:background="@drawable/btn_qq" />
 
         <ImageButton
             android:id="@+id/ibWeiXinLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="25dp"
             android:background="@drawable/btn_weixin" />
     </LinearLayout>
 

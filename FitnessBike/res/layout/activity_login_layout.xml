@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include 
+        layout="@layout/titlebar"
+        />
+    
+    <EditText 
+        android:id="@+id/etUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_or_email"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textSize="@dimen/login_and_register_edittext_textsize"
+        android:minHeight="@dimen/login_and_register_minheight"
+        android:background="@drawable/edittext_selector_normal"
+        />
+    
+    <EditText 
+        android:id="@+id/etPassWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textSize="@dimen/login_and_register_edittext_textsize"
+        android:minHeight="@dimen/login_and_register_minheight"
+        android:background="@drawable/edittext_selector_normal"
+        />
+    
+    <Button 
+        android:id="@+id/btnLogin"
+        android:background="@drawable/button_selector_normalblue_pressgray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/string_login"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/login_and_register_button_textsize"
+        />
+
+</LinearLayout>

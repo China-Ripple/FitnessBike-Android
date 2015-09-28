@@ -18,7 +18,7 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">FitnessBike</string>
+    <string name="app_name">健身骑行机</string>
     <string name="action_settings">设置</string>
     <string name="frament_first">首页</string>
     <string name="frament_second">消息</string>
@@ -28,12 +28,12 @@
 
     <!-- add by xushiyong 20150703 start -->
     <string name="string_register">注册</string>
-    <string name="string_login">登录</string>
+    <string name="string_login">登陆</string>
     <string name="string_thirder_login">第三方登录</string>
     <string name="string_phone_pre">中国(+86)</string>
     <string name="string_get_phone_verification">获取验证码</string>
     <string name="string_input_phonenumber">请输入手机号码</string>
-    <string name="string_input_verificationnumber">请输入验证码</string>
+    <string name="string_input_verificationnumber">验证码</string>
     <string name="string_input_pwd">请设置密码</string>
     <string name="string_input_pwd_confirm">请再次输入密码</string>
 
@@ -66,4 +66,19 @@
 	<string name="super_biker">骑行达人</string>
 	<string name="search">查找</string>
 	<string name="thirder_login">第三方登陆</string>
+	
+	<string name="phone_or_email">手机或邮箱</string>
+	<string name="password">密码</string>
+	<string name="string_return">返回</string>
+	<string name="getnumber">获取验证码</string>
+	<string name="nlzw">耐力之王</string>
+	<string name="jsgj">竞速冠军</string>
+		<string name="nlzw_ds">PK当日最高里程数</string>
+	<string name="jsgj_ds">PK一分钟内最高燃烧量</string>
+	<string name="pk_rule">PK积分奖励规则</string>
+	<string name="string_serch">搜索</string>
+	<string name="string_look">查找</string>
+	<string name="string_cancel">取消</string>
+	<string name="string_please_input_keyword">请输入关键字</string>
+	<string name="others">同道中人</string>
 </resources>

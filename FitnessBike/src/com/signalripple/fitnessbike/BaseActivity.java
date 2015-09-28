@@ -3,6 +3,7 @@ package com.signalripple.fitnessbike;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 public class BaseActivity extends Activity {
@@ -18,5 +19,10 @@ public class BaseActivity extends Activity {
         // TODO Auto-generated method stub
         ActionBar actionBar = getActionBar();
 //        actionBar.set
+    }
+    
+    public void log(String s)
+    {
+    	Log.i("XU", s);
     }
 }

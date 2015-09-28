@@ -1,10 +1,25 @@
 package com.signalripple.fitnessbike;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.signalripple.fitnessbike.adapter.FriendListViewAdapter;
 import com.signalripple.fitnessbike.adapter.TestAdapter;
+import com.signalripple.fitnessbike.api.API;
+import com.signalripple.fitnessbike.api.MRequset;
+import com.signalripple.fitnessbike.api.URLFactory;
+import com.signalripple.fitnessbike.bean.FriendBean;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +39,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -32,12 +48,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.fireup.yuanyang.adapter.NewsIndexAdapter;
 import cn.fireup.yuanyang.adapter.NewsListEntity;
 import cn.fireup.yuanyang.refresh.LoadMoreListView;
 import cn.fireup.yuanyang.refresh.PullToRefreshList;
 import cn.fireup.yuanyang.refresh.PullToRefreshList.ICommViewListener;
 import cn.fireup.yuanyang.swipelistview.BaseSwipeListViewListener;
+import cn.fireup.yuanyang.swipelistview.SwipeListView;
 
 public class RankingFragment extends Fragment implements OnCheckedChangeListener, ICommViewListener, OnClickListener{
 
@@ -47,11 +65,19 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 	private RadioGroup radioGroup;
 	private RadioButton rbFriendList;
 	private RadioButton rbAllPerson;
-//	NewsIndexAdapter newsIndexAdapter;
 	private FriendListViewAdapter adapter;
-	private PullToRefreshList loadDataView=null;
-	private LoadMoreListView loadMoreListView=null;
+	private FriendListViewAdapter adapterForAll;
+	private PullToRefreshList loadDataViewForFriend=null;
+	private LoadMoreListView loadMoreListViewForFriend=null;
+	
+	private PullToRefreshList loadDataViewForAll=null;
+	private LoadMoreListView loadMoreListViewForAll=null;
 	private ImageView btnAddFriend;
+	private MRequset mRequset;
+	int page = 0;
+	
+	List<Object> listForFriend = new ArrayList<Object>();
+	List<Object> listForAll = new ArrayList<Object>();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
@@ -60,32 +86,149 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 		viewList.add(inflater.inflate(R.layout.friend_list, null));
 		viewList.add(inflater.inflate(R.layout.allperson_list, null));
 		
-		SpannableStringBuilder builder = new SpannableStringBuilder(getString(R.string.string_today_friend_list));  
-		ForegroundColorSpan blueSpan = new ForegroundColorSpan(getResources().getColor(R.color.sea_blue));  
-		TextView textView = (TextView) viewList.get(0).findViewById(R.id.txtTitle);
-		builder.setSpan(blueSpan, 2, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);  
-		textView.setText(builder);
-		
-   	 	loadDataView=(PullToRefreshList)viewList.get(0).findViewById(R.id.loaddataview);
-		loadDataView.setCommViewListener(this);
-		loadMoreListView=loadDataView.getLoadMoreListView();
-		init();
-//		loadDataView.setListViewDriver(0);
-		adapter = new FriendListViewAdapter(getActivity());
-//		adapter = new TestAdapter(getActivity());
-//		adapter=new NewsIndexAdapter(getActivity());
-		loadMoreListView.setAdapter(adapter);
-		loadDataView.initData();
+		// 初始化ListView还有其他
+		initOthers();
 
 		// 初始化本视图内的控件
 		initViews(view);
+		
 		// 初始化设置控件的事件
 		initEvent();
+		
+//		requestDatasForFriend();
+//		requestDatasForAll();
 		
 		return view;
 	}	
 	
-    private void initEvent() {
+
+    private  List<Object> requestDatasForFriend() {
+		// TODO Auto-generated method stub
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("maxId", ""+(9 * (page-1))); // 9 x 0   9 x 1
+    	map.put("num", "10");  // 9 x 1   9 x 2
+    	Log.i("XU", "好友榜=="+URLFactory.getURL(API.apiFriendRanking, map));
+		mRequset.requestForJsonObject(URLFactory.getURL(API.apiFriendRanking, map),null, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				String result;
+				try {
+					result = response.getString("response");
+					if("success".equals(result))
+					{
+						Log.i("XU","结果解饿---->");
+						String people = response.getString("people");
+						Gson gson = new Gson();
+						listForFriend = gson.fromJson(people, new TypeToken<List<FriendBean>>() {}.getType());
+						
+						for (int i = 0; i < listForFriend.size(); i++) {
+							adapter.addItem(listForFriend.get(i));
+						}
+						
+						adapter.notifyDataSetChanged();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "出错的结果="+error.toString(), Toast.LENGTH_LONG).show();
+				Log.i("XU", "cuowu 请求结果--->"+error.toString());	
+			}
+		});
+			return listForFriend;
+	}
+
+    private  List<Object> requestDatasForAll() {
+		// TODO Auto-generated method stub
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("maxId", "0");
+    	map.put("num", "9");
+    	Log.i("XU", "总榜单==="+URLFactory.getURL(API.apiFriendRanking, map));
+		mRequset.requestForJsonObject(URLFactory.getURL(API.apiFriendRanking, map),null, new Listener<JSONObject>() {
+
+			@Override
+			public void onResponse(JSONObject response) {
+				// TODO Auto-generated method stub
+				String result;
+				try {
+					result = response.getString("response");
+					if("success".equals(result))
+					{
+						String people = response.getString("people");
+						Gson gson = new Gson();
+						listForAll = gson.fromJson(people, new TypeToken<List<FriendBean>>() {}.getType());
+						for (int i = 0; i < listForAll.size(); i++) {
+							adapterForAll.addItem(listForAll.get(i));
+						}
+						adapterForAll.notifyDataSetChanged();
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}, new ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity(), "出错的结果="+error.toString(), Toast.LENGTH_LONG).show();
+				Log.i("XU", "cuowu 请求结果--->"+error.toString());	
+			}
+		});
+		
+		return listForAll;
+	}
+    
+	private void initOthers() {
+		// TODO Auto-generated method stub
+		
+		// 生产请求队列对象
+		mRequset = MRequset.getInstance(getActivity());
+		
+		// 为String 设置不同分段颜色
+//		SpannableStringBuilder builder = new SpannableStringBuilder(getString(R.string.string_today_friend_list));  
+//		ForegroundColorSpan blueSpan = new ForegroundColorSpan(getResources().getColor(R.color.sea_blue));  
+//		TextView textView = (TextView) viewList.get(0).findViewById(R.id.txtTitle);
+//		builder.setSpan(blueSpan, 2, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);  
+//		textView.setText(builder);
+		
+		// 好友排行榜相关
+		loadDataViewForFriend=(PullToRefreshList)viewList.get(0).findViewById(R.id.loaddataview);
+		loadDataViewForFriend.setCommViewListener(this);
+		loadMoreListViewForFriend=loadDataViewForFriend.getLoadMoreListView();
+		
+		// 设置只能往左滑
+		loadMoreListViewForFriend.setSwipeMode(SwipeListView.SWIPE_MODE_LEFT);
+		
+		init();
+		adapter = new FriendListViewAdapter(getActivity());
+		loadMoreListViewForFriend.setAdapter(adapter);
+		loadDataViewForFriend.initData();
+		
+		//总排行榜
+		loadDataViewForAll = (PullToRefreshList)viewList.get(1).findViewById(R.id.loaddataviewforall);
+		loadDataViewForAll.setCommViewListener(new CommViewListener());
+		loadMoreListViewForAll=loadDataViewForAll.getLoadMoreListView();
+		
+		// 设置只能往左滑
+		loadMoreListViewForFriend.setSwipeMode(SwipeListView.SWIPE_MODE_LEFT);
+		
+		init();
+		adapterForAll = new FriendListViewAdapter(getActivity());
+		loadMoreListViewForAll.setAdapter(adapterForAll);
+		loadDataViewForAll.initData();
+	}
+
+	private void initEvent() {
 		// TODO Auto-generated method stub
 		btnMessage.setOnClickListener(this);
 		btnAddFriend.setOnClickListener(this);
@@ -108,14 +251,14 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 	}
 
 	public void init(){
-    	loadMoreListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+    	loadMoreListViewForFriend.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-      	  loadMoreListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+      	  loadMoreListViewForFriend.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
                 @Override
                 public void onItemCheckedStateChanged(ActionMode mode, int position,
                                                       long id, boolean checked) {
-                    mode.setTitle("Selected (" + loadMoreListView.getCountSelected() + ")");
+                    mode.setTitle("Selected (" + loadMoreListViewForFriend.getCountSelected() + ")");
                 }
 
                 @Override
@@ -140,7 +283,7 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 
                 @Override
                 public void onDestroyActionMode(ActionMode mode) {
-              	  loadMoreListView.unselectedChoiceStates();
+              	  loadMoreListViewForFriend.unselectedChoiceStates();
                 }
 
                 @Override
@@ -150,7 +293,7 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
             });
         }
 
-        loadMoreListView.setSwipeListViewListener(new BaseSwipeListViewListener() {
+        loadMoreListViewForFriend.setSwipeListViewListener(new BaseSwipeListViewListener() {
             @Override
             public void onOpened(int position, boolean toRight) {
             }
@@ -240,20 +383,24 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 		// TODO Auto-generated method stub
 		if(checkedId == R.id.rbFriend)
 		{
-			rbFriendList.setBackgroundResource(R.drawable.bg_buttons);
-			rbFriendList.setTextColor(getResources().getColor(R.color.store_blue));
+//			rbFriendList.setBackgroundResource(R.drawable.bg_buttons);
+			rbFriendList.setBackgroundColor(getResources().getColor(R.color.white));
+			rbFriendList.setTextColor(getResources().getColor(R.color.sea_blue));
 			
-			rbAllPerson.setBackgroundResource(android.R.color.transparent);
+//			rbAllPerson.setBackgroundResource(android.R.color.transparent);
+			rbAllPerson.setBackgroundColor(getResources().getColor(R.color.sea_blue));
 			rbAllPerson.setTextColor(Color.WHITE);
 			
 			viewPager.setCurrentItem(0, true);
 		}
 		else
 		{
-			rbAllPerson.setBackgroundResource(R.drawable.bg_buttons);
-			rbAllPerson.setTextColor(getResources().getColor(R.color.store_blue));
+//			rbAllPerson.setBackgroundResource(R.drawable.bg_buttons);
+			rbAllPerson.setBackgroundColor(getResources().getColor(R.color.white));
+			rbAllPerson.setTextColor(getResources().getColor(R.color.sea_blue));
 			
-			rbFriendList.setBackgroundResource(android.R.color.transparent);
+//			rbFriendList.setBackgroundResource(android.R.color.transparent);
+			rbFriendList.setBackgroundColor(getResources().getColor(R.color.sea_blue));
 			rbFriendList.setTextColor(Color.WHITE);
 			
 			viewPager.setCurrentItem(1, true);
@@ -261,24 +408,35 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 	}
 
 
+	
 	@Override
 	public List<Object> doInBackGround(int CurrentPage) {
+		Log.i("XU", "功能=>doInBackGround");
 		try {
 			Thread.sleep(50);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return objects(CurrentPage);
+		page ++;
+		return requestDatasForFriend();
 	}
 
 	@Override
 	public void callBackListData(List<Object> list) {
-		adapter.setList((ArrayList)list, true);
+		Log.i("XU", "功能=>callBackListData");
+//		ArrayList<Object> arrayList = adapter.getAlObjects();
+//		for (int i = 0; i < list.size(); i++) {
+//			arrayList.add(list.get(i));
+//		}
+//		adapter.notifyDataSetChanged();
+		//adapter.setList((ArrayList)list, true);
 	}
 
 	@Override
 	public void onHeadRefresh() {
-		adapter.clear();
+		Log.i("XU", "功能=>onHeadRefresh");
+//		adapter.clear();
+		
 	}
 	
 	String defaultTitle="";
@@ -313,5 +471,35 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 		default:
 			break;
 		}
+	}
+	
+	class CommViewListener implements ICommViewListener
+	{
+
+		@Override
+		public List<Object> doInBackGround(int CurrentPage) {
+			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return requestDatasForAll();
+		}
+
+		@Override
+		public void callBackListData(List<Object> list) {
+			// TODO Auto-generated method stub
+//			adapterForAll.setList((ArrayList)list, true);
+		}
+
+		@Override
+		public void onHeadRefresh() {
+			// TODO Auto-generated method stub
+			adapterForAll.clear();
+		}
+		
+		
+		
 	}
 }

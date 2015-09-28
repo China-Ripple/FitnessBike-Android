@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/back"
         style="@style/ListBackContent"
-        android:background="@android:color/white"
+        android:background="@drawable/round_layoutbg"
         android:tag="back" >
 
         <Button
@@ -35,7 +35,7 @@
     <RelativeLayout
         android:id="@+id/front"
         style="@style/ListFrontContent"
-        android:background="@android:color/white"
+        android:background="@drawable/round_layoutbg"
         android:tag="front" >
 
         <com.signalripple.fitnessbike.view.CircleImageView
@@ -53,7 +53,7 @@
             android:layout_alignLeft="@id/ivHead"
             android:layout_alignRight="@id/ivHead"
             android:layout_below="@id/ivHead"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:gravity="center"
             android:text="张泽涛" />
 
@@ -61,9 +61,13 @@
             android:id="@+id/btnAddFriend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="70dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:background="@drawable/button_selector_normalblue_pressgray"
             android:text="添加好友" />
     </RelativeLayout>
 

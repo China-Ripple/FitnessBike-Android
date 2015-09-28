@@ -1,142 +1,181 @@
 package com.signalripple.fitnessbike;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.signalripple.fitnessbike.api.API;
-import com.tencent.mm.sdk.modelmsg.SendAuth;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
+import com.signalripple.fitnessbike.api.MRequset;
+import com.signalripple.fitnessbike.api.URLFactory;
+import com.signalripple.fitnessbike.interfaces.IActivity;
+import com.signalripple.fitnessbike.utils.Activity2Activity;
+import com.signalripple.fitnessbike.utils.ShareDB;
+import com.signalripple.fitnessbike.utils.ToastUtil;
 
-public class LoginActivity extends BaseActivity implements OnClickListener {
+public class LoginActivity extends BaseActivity implements IActivity, OnClickListener{
 
-	private TextView txtLogin;
-	private Tencent tencent;
-	private ImageButton btnQQLogin;
-	private ImageButton btnWXLogin;
-	BaseUiListener baseUiListener = new BaseUiListener();
-
+	private EditText etUserName;
+	private EditText etPassWord;
+	private Button btnLogin;
+	private TextView txtReturn;
+	private TextView txtRegister;
+	private MRequset mRequset;
+	private ProgressDialog dialog;
+	String account;
+	String password;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
 		
+		auto();
 		
-		initViews();
+		setContentView(R.layout.activity_login_layout);
+		
+		initView();
+		initValue();
 		initEvent();
-		
-//		RequestQueue queue = Volley.newRequestQueue(this);
-//		queue.add(new JsonObjectRequest(ConnectionURL.loginRequestURL, null, new Listener<JSONObject>() {
-//
-//			@Override
-//			public void onResponse(JSONObject response) {
-//				// TODO Auto-generated method stub
-//				Log.i("XU", " 获取结果------>"+response.toString());
-//			}
-//		}, new ErrorListener() {
-//
-//			@Override
-//			public void onErrorResponse(VolleyError error) {
-//				// TODO Auto-generated method stub
-//				Log.i("XU", " 出错------>"+error.toString());
-//				
-//			}
-//		}));
 	}
 
-	private void initEvent() {
+
+	private void auto() {
 		// TODO Auto-generated method stub
-		btnWXLogin.setOnClickListener(this);
-		btnQQLogin.setOnClickListener(this);
-		txtLogin.setOnClickListener(this);
+		String token = ShareDB.getStringFromDB(this, "token");
+		if(token != null)
+		{
+			Intent intent = new Intent(this, MainTabActivity.class);
+			startActivity(intent);
+		}
 	}
 
-	private void initViews() {
+	@Override
+	public void initView() {
 		// TODO Auto-generated method stub
-		btnWXLogin = (ImageButton)this.findViewById(R.id.ibWeiXinLogin);
-		btnQQLogin = (ImageButton)this.findViewById(R.id.ibQQLogin);
+		etUserName = (EditText)this.findViewById(R.id.etUserName);
+		etPassWord = (EditText)this.findViewById(R.id.etPassWord);
+		btnLogin   = (Button)this.findViewById(R.id.btnLogin);
+		txtReturn  = (TextView)this.findViewById(R.id.include_view_btnLeft);
+		txtRegister= (TextView)this.findViewById(R.id.include_view_btnRight);
+	}
 
-		tencent = Tencent.createInstance(API.QQAPPID, this.getApplicationContext());
-		txtLogin = (TextView)this.findViewById(R.id.txtLogin);
+	@Override
+	public void initValue() {
+		// TODO Auto-generated method stub
+		mRequset = MRequset.getInstance(this);
+	}
+
+	@Override
+	public void initEvent() {
+		// TODO Auto-generated method stub
+		btnLogin.setOnClickListener(this);
+		txtRegister.setOnClickListener(this);
+		txtReturn.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.ibWeiXinLogin:
-		    SendAuth.Req req = new SendAuth.Req();
-		    req.openId= API.AppID;
-		    req.scope = "snsapi_userinfo";
-		    req.state = "wechat_sdk_demo_test";
-		    MyApplication.wxapi.sendReq(req);
-			
+			// 登陆
+		case R.id.btnLogin:
+			login();
 			break;
-		case R.id.ibQQLogin:
-			if(tencent != null)
-			{
-				if (!tencent.isSessionValid())
-				{
-					tencent.login(this, API.SCOPE, baseUiListener);
-				}
-			}
+			// 返回
+		case R.id.include_view_btnLeft:
+			finish();
 			break;
-		case R.id.txtLogin:
-			Intent intent = new Intent(this, MainTabActivity.class);
-			overridePendingTransition(R.anim.hyperspace_in, R.anim.hyperspace_out);
-			startActivity(intent);
+			// 注册
+		case R.id.include_view_btnRight:
+			Activity2Activity.gotoNewActivity(this, RegisterActivity.class);
 			break;
+
 		default:
 			break;
 		}
 	}
-	
-	@Override
-	   protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
-	                Tencent.handleResultData(data, baseUiListener);  
-	            super.onActivityResult(requestCode, resultCode, data);  
-	        } 
 
-	
-    @Override  
-    protected void onDestroy() {  
-        if (tencent != null) {  
-            //注销登录  
-            tencent.logout(this); 
-        }  
-        super.onDestroy();  
-    }  
-	
-	private class BaseUiListener implements IUiListener {
 
-		@Override
-		public void onCancel() {
-			// TODO Auto-generated method stub
-			Toast.makeText(LoginActivity.this, "用户取消登陆授权", Toast.LENGTH_SHORT).show();
+	private void login() {
+		account = getTextValue(etUserName);
+		password = getTextValue(etPassWord);
+		
+		if(account == null || password == null)
+			return;
+		
+		dialog = ProgressDialog.show(this, "温馨提示", "正在验证,请稍等");
+		
+		if( account!= null && password != null)
+		{
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("account", account);
+			map.put("password", password);
+			mRequset.requestForJsonObject(URLFactory.getURL(API.apiLogin, map),null, new Listener<JSONObject>() {
+
+				@Override
+				public void onResponse(JSONObject response) {
+					// TODO Auto-generated method stub
+					try {
+						if(response != null)
+						{
+							Log.i("XU", "登陆请求 ---》result="+response.toString());
+							dialog.dismiss();
+							String result = response.getString("response");
+							// 服务器验证成功 ，可以登录
+							if("success".equals(result))
+							{
+								ShareDB.save2DB(LoginActivity.this, "token", response.getString("token"));
+								ShareDB.save2DB(LoginActivity.this, "account", account);
+								ShareDB.save2DB(LoginActivity.this, "password", password);
+
+								Activity2Activity.gotoNewActivity(LoginActivity.this, MainTabActivity.class);
+							}
+							else
+							{
+								ToastUtil.show(LoginActivity.this, "登陆失败", ToastUtil.ERROR);
+							}
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}, new ErrorListener() {
+
+				@Override
+				public void onErrorResponse(VolleyError error) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
-
-		@Override
-		public void onComplete(Object arg0) {
-			// TODO Auto-generated method stub
-			Log.i("XU", "结果="+arg0.toString());
-			Toast.makeText(LoginActivity.this, arg0.toString(), Toast.LENGTH_SHORT).show();
-		}
-
-		@Override
-		public void onError(UiError arg0) {
-			// TODO Auto-generated method stub
-			Toast.makeText(LoginActivity.this, "登陆授权出错", Toast.LENGTH_SHORT).show();
-		}
-
-
 	}
 
+	private String getTextValue(EditText editText) {
+		// TODO Auto-generated method stub
+		String temp = editText.getText().toString();
+		if(temp == null || temp.trim().equals(""))
+		{
+			editText.setError("不能为空");
+			return null;
+		}
+		else 
+			return temp;
+			
+	}
 }

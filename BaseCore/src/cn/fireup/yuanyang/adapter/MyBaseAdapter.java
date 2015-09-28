@@ -6,6 +6,7 @@ import java.util.List;
 import cn.fireup.yuanyang.refresh.PullToRefreshView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -29,6 +30,20 @@ public class MyBaseAdapter extends BaseAdapter {
 	@Override
 	public long getItemId(int arg0) {
 		return 0;
+	}
+	
+	/**add by xushiyong */
+	public void addItem(Object item)
+	{
+		alObjects.add(item);
+	}
+	
+	/**add by xushiyong 2015*/
+	public void deleteItem(int position)
+	{
+		alObjects.remove(position);
+		Log.i("XU", "删除:size="+alObjects.size());
+		notifyDataSetChanged();
 	}
 	
 	/**

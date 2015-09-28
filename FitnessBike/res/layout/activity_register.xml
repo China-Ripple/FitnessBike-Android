@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/titlebar"/>
+    
+    <EditText 
+        android:id="@+id/etUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_or_email"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="@dimen/login_and_register_edittext_textsize"
+        android:minHeight="@dimen/login_and_register_minheight"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edittext_selector_normal"
+        />
+    
+    <EditText 
+        android:id="@+id/etPassWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:layout_marginTop="15dp"
+        android:inputType="textPassword"
+        android:background="@drawable/edittext_selector_normal"
+        android:textSize="@dimen/login_and_register_edittext_textsize"
+        android:minHeight="@dimen/login_and_register_minheight"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="horizontal"
+        >
+	    <EditText 
+	        android:id="@+id/edVerificationCode"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.6"
+	        android:textSize="@dimen/login_and_register_edittext_textsize"
+	        android:minHeight="@dimen/login_and_register_minheight"
+	        android:hint="@string/string_input_verificationnumber"
+	        android:background="@drawable/edittext_selector_normal"
+	        android:layout_gravity="center_vertical"
+	        />
+	    <Button 
+	        android:id="@+id/btnGetVerificationCode"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.4"
+	        android:textSize="12sp"
+	        android:textColor="@color/white"
+	        android:minHeight="@dimen/login_and_register_minheight"
+	        android:layout_marginLeft="10dp"
+	        android:background="@drawable/button_selector_normalblue_pressgray"
+	        android:text="@string/getnumber"
+	        />
+    </LinearLayout>
+    
+    <Button 
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/string_register"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/login_and_register_button_textsize"
+        android:background="@drawable/button_selector_normalblue_pressgray"
+        />
+    
+    
+
+</LinearLayout>

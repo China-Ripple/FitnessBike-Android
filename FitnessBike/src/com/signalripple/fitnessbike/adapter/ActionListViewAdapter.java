@@ -2,44 +2,47 @@ package com.signalripple.fitnessbike.adapter;
 
 import java.util.List;
 
-import com.signalripple.fitnessbike.R;
-import com.signalripple.fitnessbike.bean.ActionBean;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import cn.fireup.yuanyang.adapter.MyBaseAdapter;
 
-public class ActionListViewAdapter extends BaseAdapter {
+import com.signalripple.fitnessbike.R;
+import com.signalripple.fitnessbike.bean.ActionBean;
 
-	private List<ActionBean> list;
+public class ActionListViewAdapter extends MyBaseAdapter {
+
 	private Context context;
 	private LayoutInflater inflater;
 	
-	public ActionListViewAdapter(Context context,List<ActionBean> list)
+	public ActionListViewAdapter(Context context)
 	{
 		inflater = LayoutInflater.from(context);
 		this.context = context;
-		this.list = list;
 	}
 	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return list.size();
+		return alObjects.size();//.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return list.get(position);
+		return alObjects.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return position;
+	}
+	
+	public void clear() {
+		this.alObjects.clear();
+		notifyDataSetChanged();
 	}
 
 	@Override

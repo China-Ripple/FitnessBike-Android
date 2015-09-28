@@ -41,12 +41,12 @@
     </RelativeLayout>
     
     
-    <ListView 
+    <cn.fireup.yuanyang.refresh.PullToRefreshList 
         android:id="@+id/listview"
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-    </ListView>
+    </cn.fireup.yuanyang.refresh.PullToRefreshList>
 
 </LinearLayout>

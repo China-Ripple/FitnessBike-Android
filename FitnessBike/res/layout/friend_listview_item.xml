@@ -2,16 +2,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:minHeight="@dimen/ranking_fragment_listview_minheight"
     android:padding="4dp" >
 
     <LinearLayout
         android:id="@+id/back"
         style="@style/ListBackContent"
-        android:background="@android:color/black"
+        android:minHeight="@dimen/ranking_fragment_listview_minheight"
+        android:background="@drawable/round_layoutbg"
         android:tag="back" >
 
         <Button
-            android:id="@+id/example_row_b_action_1"
+            android:id="@+id/btnPK"
             style="@style/ListButtonAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,16 +39,17 @@
     <RelativeLayout
         android:id="@+id/front"
         style="@style/ListFrontContent"
-        android:background="@android:color/black"
+        android:minHeight="@dimen/ranking_fragment_listview_minheight"
+        android:background="@drawable/round_layoutbg"
         android:tag="front" >
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ivNumber"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            >
 
             <ImageView
                 android:id="@+id/ivNumberOfImage"
@@ -52,18 +57,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/first" />
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/first" />
 
             <TextView
                 android:id="@+id/ivNumberOfText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/first"
                 android:textColor="@color/sea_blue"
                 android:visibility="gone" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <com.signalripple.fitnessbike.view.CircleImageView
             android:id="@+id/ivHead"

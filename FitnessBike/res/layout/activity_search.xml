@@ -3,83 +3,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-     >
-    
-    	<LinearLayout 
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/titlebar" />
+
+    <LinearLayout
+        android:id="@+id/layout_search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/white"
-        android:padding="5dp"
         android:gravity="center_horizontal|center_vertical"
-        >
-		<ImageButton 
-		    android:id="@+id/ivSearchBar"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:background="@drawable/bg_search_bar"
-		    />
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/ivSearchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/edittext_selector_normal"
+                android:hint="@string/string_please_input_keyword"
+                android:inputType="textNoSuggestions" />
+
+            <ImageButton
+                android:id="@+id/ibSearchIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/icon_search"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_selector_normalblue_pressgray"
+            android:text="@string/string_cancel"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
     </LinearLayout>
 
-    <RelativeLayout 
+    <LinearLayout
+        android:id="@+id/normal_state_views_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp"
-        >
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nearbypeople"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:textSize="18sp"
-            />
-        <ImageButton 
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <RelativeLayout
             android:id="@+id/ibDetailsNearByPeople"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/icon_detail_gray"
-            />
-    </RelativeLayout>
-    
-    <RelativeLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        >
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/super_biker"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:textSize="18sp"
-            />
-        <ImageButton 
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/nearbypeople"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/icon_detail_lightgray"
+                android:contentDescription="详细图标  灰色" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/ibDetailsSuperBiker"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/icon_detail_gray"
-            />
-    </RelativeLayout>
-    
-        <GridView 
+            android:layout_marginTop="18dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/super_biker"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/icon_detail_lightgray" />
+        </RelativeLayout>
+
+        <GridView
             android:id="@+id/gridview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:numColumns="2"
-            android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
-            android:verticalSpacing="20dp"  
-		    android:horizontalSpacing="10dp"  
-		    android:gravity="center"
-            >
+            android:layout_marginTop="35dp"
+            android:gravity="center"
+            android:horizontalSpacing="10dp"
+            android:numColumns="2"
+            android:verticalSpacing="20dp" >
         </GridView>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
+
 </LinearLayout>

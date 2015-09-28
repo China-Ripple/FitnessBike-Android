@@ -21,5 +21,11 @@
     
     <dimen name="fragment_person_info_layout_textview_size">12sp</dimen>
     <!-- add by xushiyong 20150703 end -->
-
+	<dimen name="vs_textsize">20sp</dimen>
+	
+	<dimen name="login_and_register_top_imagetip_inner_size">105dp</dimen>
+	<dimen name="login_and_register_top_imagetip_outter_size">106dp</dimen>
+	<dimen name="login_and_register_top_textsize">16sp</dimen>
+	<dimen name="login_and_register_center_margin_top">85dp</dimen>
+	<dimen name="login_and_register_minheight">50dp</dimen>
 </resources>

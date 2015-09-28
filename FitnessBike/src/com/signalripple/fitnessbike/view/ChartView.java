@@ -311,7 +311,7 @@ public class ChartView extends View {
 				if (Data != null) {
 					// 数据值
 					if (!"0".equals(Data[i])) {
-						drawChart(canvas,XPoint + (i+1) * XScale, YCoord(Data[i]));
+						drawChart(canvas,(XPoint + (i+1) * XScale)-12, YCoord(Data[i]));
 						}
 					}
 				} catch (Exception e) {
@@ -322,9 +322,12 @@ public class ChartView extends View {
 //		canvas.drawLine(XPoint + XLength, YPoint, XPoint + XLength - 9,
 //				YPoint + 6, paint1);
 		paint.setTextSize(16);
-
+		
+		//设置标题的画笔相关属性
 		paint.setTextSize(24);
-		canvas.drawText(Title, 150, 50, paint);
+		float textWidth = paint.measureText(Title);
+		paint.setColor(getResources().getColor(R.color.white));
+		canvas.drawText(Title, this.getWidth() / 2-textWidth / 2, 22, paint);
 		paint.setTextSize(30);
 		canvas.drawText(pefValue, XLength - 100, 50, paint);
 	}

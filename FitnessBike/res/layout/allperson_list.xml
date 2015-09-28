@@ -4,12 +4,13 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg"
     android:orientation="vertical" >
-    
-	<ImageView 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_margin="6dp"
-	    android:src="@drawable/search_bar"
-	    />
+	
+	 <cn.fireup.yuanyang.refresh.PullToRefreshList
+        android:id="@+id/loaddataviewforall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg"
+        />
 
 </LinearLayout>

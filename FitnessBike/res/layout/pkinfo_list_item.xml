@@ -11,27 +11,28 @@
         style="@style/ListBackContent"
         android:background="@android:color/black"
         android:tag="back" >
-
+		<!-- 
         <Button
-            android:id="@+id/example_row_b_action_1"
+            android:id="@+id/btnPK"
             style="@style/ListButtonAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PK" />
 
         <Button
-            android:id="@+id/example_row_b_action_2"
+            android:id="@+id/btnDelete"
             style="@style/ListButtonAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="删除" />
 
         <Button
-            android:id="@+id/example_row_b_action_3"
+            android:id="@+id/btnMessage"
             style="@style/ListButtonAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="消息" />
+		 -->
     </LinearLayout>
 
     <RelativeLayout

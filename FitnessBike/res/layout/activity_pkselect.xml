@@ -16,7 +16,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="30dp"
         android:padding="8dp"
-        android:background="@color/black" >
+        android:background="@drawable/round_layoutbg" >
 
         <TextView
             android:id="@+id/txtVS"
@@ -30,20 +30,20 @@
             android:textSize="@dimen/vs_textsize" />
 
         <com.signalripple.fitnessbike.view.CircleImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/txtVS"
-            android:src="@drawable/xianjian01" />
+            android:src="@drawable/test1" />
 
         <com.signalripple.fitnessbike.view.CircleImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/txtVS"
-            android:src="@drawable/xianjian03" />
+            android:src="@drawable/test3" />
     </RelativeLayout>
 
 

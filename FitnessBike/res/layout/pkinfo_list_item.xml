@@ -2,14 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/black"
+    android:background="@color/bg_for_cell"
     android:paddingTop="4dp"
     android:paddingBottom="4dp" >
 
     <LinearLayout
         android:id="@+id/back"
         style="@style/ListBackContent"
-        android:background="@android:color/black"
         android:tag="back" >
 		<!-- 
         <Button
@@ -38,7 +37,7 @@
     <RelativeLayout
         android:id="@+id/front"
         style="@style/ListFrontContent"
-        android:background="@android:color/black"
+        android:background="@color/bg_for_cell"
         android:tag="front" >
 
         <TextView

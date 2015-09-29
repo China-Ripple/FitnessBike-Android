@@ -5,11 +5,14 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:minHeight="@dimen/ranking_fragment_listview_minheight"
-    android:padding="4dp" >
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    >
 
     <LinearLayout
         android:id="@+id/back"
         style="@style/ListBackContent"
+        android:layout_marginTop="10dp"
         android:minHeight="@dimen/ranking_fragment_listview_minheight"
         android:background="@drawable/round_layoutbg"
         android:tag="back" >
@@ -39,6 +42,7 @@
     <RelativeLayout
         android:id="@+id/front"
         style="@style/ListFrontContent"
+        android:layout_marginTop="10dp"
         android:minHeight="@dimen/ranking_fragment_listview_minheight"
         android:background="@drawable/round_layoutbg"
         android:tag="front" >
@@ -76,14 +80,14 @@
 
         <com.signalripple.fitnessbike.view.CircleImageView
             android:id="@+id/ivHead"
-            android:layout_width="43dp"
-            android:layout_height="43dp"
+            android:layout_width="@dimen/person_fragment_header_size"
+            android:layout_height="@dimen/person_fragment_header_size"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@id/ivNumber"
-            android:maxHeight="45dp"
-            android:maxWidth="45dp"
-            android:src="@drawable/xianjian03" />
+            android:maxHeight="60dp"
+            android:maxWidth="60dp"
+            android:src="@drawable/test3" />
 
         <LinearLayout
             android:id="@+id/nameInfoLayout"

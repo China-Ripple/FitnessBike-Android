@@ -7,17 +7,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content" >
+        android:background="@color/black"
+        android:layout_height="@dimen/titlebar_height" >
 
         <ImageView
             android:id="@+id/ivShare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/share" />
 
         <TextView
@@ -43,9 +42,9 @@
     
     <cn.fireup.yuanyang.refresh.PullToRefreshList 
         android:id="@+id/listview"
-        android:layout_marginTop="22dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="@null"
         >
     </cn.fireup.yuanyang.refresh.PullToRefreshList>
 

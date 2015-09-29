@@ -2,11 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="@dimen/ranking_fragment_listview_minheight"
     android:padding="4dp" >
 
     <LinearLayout
         android:id="@+id/back"
         style="@style/ListBackContent"
+        android:minHeight="@dimen/ranking_fragment_listview_minheight"
         android:background="@drawable/round_layoutbg"
         android:tag="back" >
 
@@ -35,14 +37,16 @@
     <RelativeLayout
         android:id="@+id/front"
         style="@style/ListFrontContent"
+        android:minHeight="@dimen/ranking_fragment_listview_minheight"
         android:background="@drawable/round_layoutbg"
         android:tag="front" >
 
         <com.signalripple.fitnessbike.view.CircleImageView
             android:id="@+id/ivHead"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="@dimen/person_fragment_header_size"
+            android:layout_height="@dimen/person_fragment_header_size"
             android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:src="@drawable/xianjian04" />
 
@@ -50,10 +54,10 @@
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/ivHead"
-            android:layout_alignRight="@id/ivHead"
-            android:layout_below="@id/ivHead"
+            android:layout_toRightOf="@id/ivHead"
             android:textColor="@android:color/white"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
             android:gravity="center"
             android:text="张泽涛" />
 
@@ -64,7 +68,7 @@
             android:minWidth="70dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="12dp"
             android:textColor="@android:color/white"
             android:textSize="13sp"
             android:background="@drawable/button_selector_normalblue_pressgray"

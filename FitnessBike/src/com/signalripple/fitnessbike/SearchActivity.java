@@ -82,10 +82,11 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 		ibSearch = (ImageButton)this.findViewById(R.id.ibSearchIcon);
 		
 		gridview = (GridView)this.findViewById(R.id.gridview);
-		list.add(new SuperBiker());
-		list.add(new SuperBiker());
-		list.add(new SuperBiker());
-		list.add(new SuperBiker());
+		// 模拟数据
+		list.add(new SuperBiker("范冰冰","test1"));
+		list.add(new SuperBiker("张含韵","test2"));
+		list.add(new SuperBiker("王祖贤","test3"));
+		list.add(new SuperBiker("刘亦菲","test4"));
 		
 		layoutSearchBar = (LinearLayout)this.findViewById(R.id.layout_search_bar);
 		layoutTitleBar = (RelativeLayout)this.findViewById(R.id.layout_titlebar);
@@ -164,9 +165,10 @@ public class SearchActivity extends BaseActivity implements OnClickListener {
 //		mRequset.requestForJsonObject(url, jsonRequest, listener, errorListener)
 		
 		// 模拟数据
-		listSearch.add(new SuperBiker());
-		listSearch.add(new SuperBiker());
-		listSearch.add(new SuperBiker());
+		listSearch.add(new SuperBiker("范冰冰","test1"));
+		listSearch.add(new SuperBiker("张含韵","test2"));
+		listSearch.add(new SuperBiker("王祖贤","test3"));
+		listSearch.add(new SuperBiker("刘亦菲","test4"));
 
 		adapter.notifyDataSetChanged();
 	}

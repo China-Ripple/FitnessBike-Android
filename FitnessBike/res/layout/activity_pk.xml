@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/titlebar_height"
         android:padding="10dp"
         android:background="@color/black"
         >
@@ -36,7 +36,6 @@
         android:id="@+id/loaddataview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="12dp"
         android:background="@drawable/bg" />
 
 </LinearLayout>

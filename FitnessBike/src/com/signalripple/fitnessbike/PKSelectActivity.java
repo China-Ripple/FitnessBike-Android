@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PKSelectActivity extends BaseActivity implements IActivity, OnClickListener{
 	
@@ -31,6 +32,9 @@ public class PKSelectActivity extends BaseActivity implements IActivity, OnClick
 	private MRequset mRequset;
 	private String defenderid;
 	private String defierid;
+	private TextView txtReturn;
+	private TextView txtTitle;
+	private TextView txtRight;
 	
 	
 	@Override
@@ -56,12 +60,16 @@ public class PKSelectActivity extends BaseActivity implements IActivity, OnClick
 		// TODO Auto-generated method stub
 		ivJsgj = (ImageView)this.findViewById(R.id.ivJsgj);
 		ivNlzw = (ImageView)this.findViewById(R.id.ivNlzw);
+		txtReturn = (TextView)this.findViewById(R.id.include_view_btnLeft);
+		txtTitle = (TextView)this.findViewById(R.id.include_view_titlebar_text);
+		txtRight = (TextView)this.findViewById(R.id.include_view_btnRight);
 	}
 
 	@Override
 	public void initValue() {
 		// TODO Auto-generated method stub
-		
+		txtTitle.setText("PK");
+		txtRight.setVisibility(View.GONE);
 	}
 
 	@Override
@@ -69,6 +77,7 @@ public class PKSelectActivity extends BaseActivity implements IActivity, OnClick
 		// TODO Auto-generated method stub
 		ivJsgj.setOnClickListener(this);
 		ivNlzw.setOnClickListener(this);
+		txtReturn.setOnClickListener(this);
 	}
 
 	@Override
@@ -80,6 +89,9 @@ public class PKSelectActivity extends BaseActivity implements IActivity, OnClick
 			break;
 		case R.id.ivJsgj:
 			requset(API.jsgj);
+			break;
+		case R.id.include_view_btnLeft:
+			finish();
 			break;
 		default:
 			break;

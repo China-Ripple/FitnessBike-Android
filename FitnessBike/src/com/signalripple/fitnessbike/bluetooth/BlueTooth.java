@@ -1,8 +1,6 @@
 package com.signalripple.fitnessbike.bluetooth;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,10 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
-import android.webkit.WebView;
-import android.widget.Button;
+import android.widget.Toast;
 
-import com.signalripple.fitnessbike.R;
 import com.signalripple.fitnessbike.api.API;
 import com.signalripple.fitnessbike.utils.ToastUtil;
 
@@ -46,6 +42,7 @@ public class BlueTooth {
 		// 打开蓝牙   
 		if (!bluetoothAdapter.isEnabled())  
 		{  
+			Log.i("XU", "蓝牙已打开");
 		    Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);  
 		    // 设置蓝牙可见性，最多300秒   
 		    intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);  
@@ -113,11 +110,13 @@ public class BlueTooth {
 	        if (BluetoothDevice.ACTION_FOUND.equals(action)) {    
 	            // 获取查找到的蓝牙设备      
 	            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);    
-	             
+	            
+	            Log.i("XU", "找到蓝牙设备:"+device.getName());
+	            
 	            // 如果查找到的设备符合要连接的设备，处理      
 	            if (device.getName().equalsIgnoreCase(name)) {
 	            	
-	            	Log.i("XU", "名字="+device.getName());
+	            	
 	                // 搜索蓝牙设备的过程占用资源比较多，一旦找到需要连接的设备后需要及时关闭搜索      
 	                bluetoothAdapter.cancelDiscovery();    
 	                // 获取蓝牙设备的连接状态      
@@ -178,8 +177,9 @@ public class BlueTooth {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-//蓝牙连接异常=java.io.IOException: Service discovery failed
+			//蓝牙连接异常=java.io.IOException: Service discovery failed
 			Log.i("XU", "蓝牙连接异常="+e.toString());
+			Toast.makeText(context, "蓝牙连接异常:"+e.toString(), Toast.LENGTH_LONG).show();
 		}
 	}   
 	

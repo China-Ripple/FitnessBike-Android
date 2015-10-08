@@ -20,13 +20,18 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageContainer;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.VolleyError;
 import com.google.gson.JsonObject;
 import com.signalripple.fitnessbike.api.API;
+import com.signalripple.fitnessbike.api.BitmapCache;
 import com.signalripple.fitnessbike.api.MRequset;
 import com.signalripple.fitnessbike.api.URLFactory;
 import com.signalripple.fitnessbike.utils.ShareDB;
 import com.signalripple.fitnessbike.view.ChartView;
+import com.signalripple.fitnessbike.view.CircleImageView;
 import com.signalripple.fitnessbike.view.RoundProgressBar;
 
 public class PersonFragment extends Fragment implements OnCheckedChangeListener{
@@ -40,6 +45,7 @@ public class PersonFragment extends Fragment implements OnCheckedChangeListener{
 	private TextView txtTodayNumber;
 	private TextView txtAllNumber;
 	private TextView txtMaxRecorderNumber;
+	private CircleImageView circleImageViewForHeader;
 	private String[] mileValue ;
 	private String[] caloryValue ;
 	
@@ -130,6 +136,15 @@ public class PersonFragment extends Fragment implements OnCheckedChangeListener{
 		rbCalory = (RadioButton)view.findViewById(R.id.rbCalori);
 		rbDistance = (RadioButton)view.findViewById(R.id.rbDistance);
 		rbDistance.setChecked(true);	
+		
+		circleImageViewForHeader = (CircleImageView)view.findViewById(R.id.iv_fragment_person_header);
+//		ImageLoader loader = new ImageLoader(mRequset.getRequestQueue(), new BitmapCache());
+//
+//	    ImageListener listener = ImageLoader.getImageListener(circleImageViewForHeader,  
+//	            R.drawable.test1, R.drawable.test2);  
+//
+//		loader.get("http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg", listener);
+		
 		
 		txtAllNumber = (TextView)view.findViewById(R.id.txtAllNumber);
 		txtMaxRecorderNumber = (TextView)view.findViewById(R.id.txtMaxRecorderNumber);
@@ -268,12 +283,12 @@ public class PersonFragment extends Fragment implements OnCheckedChangeListener{
 		if(checkedId == R.id.rbCalori)
 		{
 			//rbCalory.setBackgroundResource(R.drawable.bg_buttons);
-			rbCalory.setBackgroundColor(getResources().getColor(R.color.white));
-			rbCalory.setTextColor(getResources().getColor(R.color.sea_blue));
+			rbCalory.setBackgroundColor(getResources().getColor(R.color.sea_blue));
+			rbCalory.setTextColor(getResources().getColor(R.color.white));
 			
 			//rbDistance.setBackgroundResource(android.R.color.transparent);
-			rbDistance.setBackgroundColor(getResources().getColor(R.color.sea_blue));
-			rbDistance.setTextColor(Color.WHITE);
+			rbDistance.setBackgroundColor(getResources().getColor(R.color.white));
+			rbDistance.setTextColor(getResources().getColor(R.color.sea_blue));
 			
 			chartView.setValueArray(caloryValue);
 			chartView.setTitle("七日燃烧卡路里");
@@ -281,12 +296,12 @@ public class PersonFragment extends Fragment implements OnCheckedChangeListener{
 		else
 		{
 //			rbDistance.setBackgroundResource(R.drawable.bg_buttons);
-			rbDistance.setBackgroundColor(getResources().getColor(R.color.white));
-			rbDistance.setTextColor(getResources().getColor(R.color.sea_blue));
+			rbDistance.setBackgroundColor(getResources().getColor(R.color.sea_blue));
+			rbDistance.setTextColor(getResources().getColor(R.color.white));
 			
 //			rbCalory.setBackgroundResource(android.R.color.transparent);
-			rbCalory.setBackgroundColor(getResources().getColor(R.color.sea_blue));
-			rbCalory.setTextColor(Color.WHITE);
+			rbCalory.setBackgroundColor(getResources().getColor(R.color.white));
+			rbCalory.setTextColor(getResources().getColor(R.color.sea_blue));
 			
 			chartView.setValueArray(mileValue);
 			chartView.setTitle("七日运动里程");

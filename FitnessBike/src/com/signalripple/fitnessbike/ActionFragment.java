@@ -47,6 +47,7 @@ public class ActionFragment extends Fragment implements ICommViewListener{
 		loadDataViewForFriend=(PullToRefreshList)view.findViewById(R.id.listview);
 		loadDataViewForFriend.setCommViewListener(this);
 		loadMoreListViewForFriend=loadDataViewForFriend.getLoadMoreListView();
+		loadMoreListViewForFriend.setDivider(null);
 		
 		// 设置只能往左滑
 		loadMoreListViewForFriend.setSwipeMode(SwipeListView.SWIPE_MODE_NONE);

@@ -16,7 +16,8 @@
 	
 	<dimen name="login_and_register_edittext_textsize">14sp</dimen>
 	<dimen name="login_and_register_button_textsize">15sp</dimen>
-	<dimen name="titlebar_height">65dp</dimen>
+	<dimen name="titlebar_height">60dp</dimen>
+	<dimen name="viewpage_margin_top">30dp</dimen>
 	
 	<dimen name="person_fragment_RoundProgressBar_size">105dp</dimen>
 	<dimen name="person_fragment_headerView_size">100dp</dimen>

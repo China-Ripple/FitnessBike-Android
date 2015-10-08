@@ -2,17 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
     android:minHeight="@dimen/ranking_fragment_listview_minheight"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
     >
 
     <LinearLayout
         android:id="@+id/back"
         style="@style/ListBackContent"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/friend_listview_item_margin_left_right"
+        android:layout_marginRight="@dimen/friend_listview_item_margin_left_right"
         android:minHeight="@dimen/ranking_fragment_listview_minheight"
         android:background="@drawable/round_layoutbg"
         android:tag="back" >
@@ -22,20 +20,26 @@
             style="@style/ListButtonAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_selector_normalblue_pressgray"
+            android:textSize="14sp"
             android:text="PK" />
 
         <Button
             android:id="@+id/example_row_b_action_2"
             style="@style/ListButtonAction"
             android:layout_width="wrap_content"
+            android:background="@drawable/button_selector_normalblue_pressgray"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:text="删除" />
 
         <Button
             android:id="@+id/example_row_b_action_3"
             style="@style/ListButtonAction"
             android:layout_width="wrap_content"
+            android:background="@drawable/button_selector_normalblue_pressgray"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:text="消息" />
     </LinearLayout>
 
@@ -43,6 +47,8 @@
         android:id="@+id/front"
         style="@style/ListFrontContent"
         android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/friend_listview_item_margin_left_right"
+        android:layout_marginRight="@dimen/friend_listview_item_margin_left_right"
         android:minHeight="@dimen/ranking_fragment_listview_minheight"
         android:background="@drawable/round_layoutbg"
         android:tag="front" >
@@ -103,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="宁泽寿"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/sea_blue" />
 
             <TextView
                 android:id="@+id/txtDistance"

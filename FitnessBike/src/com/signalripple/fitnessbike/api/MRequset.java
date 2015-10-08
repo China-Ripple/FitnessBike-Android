@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.widget.ImageView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -17,13 +18,25 @@ import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.signalripple.fitnessbike.R;
 import com.signalripple.fitnessbike.utils.ShareDB;
 
+/**
+ * Volley框架工具类
+ * @author xushiyong
+ * @todo 用于简化Vollery框架网络请求的操作
+ */
 public class MRequset{
 
 	private Context context;
 	private static MRequset mRequset;
 	private RequestQueue requestQueue;
+	
+	public RequestQueue getRequestQueue()
+	{
+		return requestQueue;
+	}
+	
 	
 	private MRequset(Context context)
 	{
@@ -36,6 +49,31 @@ public class MRequset{
 		if(mRequset == null)
 			mRequset = new MRequset(context);
 		return mRequset;
+	}
+	
+	/**
+	 * 为指定的ImageView或子对象加载网络图片
+	 * @param url	图片网络连接地址
+	 * @param listener	加载的监听事件
+	 */
+	public void loadImageForView(String url,ImageListener listener)
+	{
+		ImageLoader loader = new ImageLoader(mRequset.getRequestQueue(), new BitmapCache());
+		loader.get(url, listener);
+	}
+	
+	/**
+	 * 为指定的ImageView或子对象加载网络图片
+	 * @param url	图片网络连接地址
+	 * @param imageViewForLoadImage		用于承载显示图片，将要加载图片的视图控件或其子控件
+	 * @param errorImage  	加载出错时展示的图片资源id
+	 * @param defaultImage	加载图片等待中，亦即默认图片的资源id
+	 */
+	public void loadImageForView(String url,ImageView imageViewForLoadImage,int errorImage,int defaultImage)
+	{
+		ImageLoader loader = new ImageLoader(mRequset.getRequestQueue(), new BitmapCache());
+		ImageListener listener = ImageLoader.getImageListener(imageViewForLoadImage, defaultImage, errorImage);
+		loader.get(url, listener);
 	}
 	
 	/**

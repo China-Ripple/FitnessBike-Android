@@ -28,6 +28,7 @@
             android_custom:textSize="18sp" />
 
         <com.signalripple.fitnessbike.view.CircleImageView
+            android:id="@+id/iv_fragment_person_header"
             android:layout_width="@dimen/person_fragment_headerView_size"
             android:layout_height="@dimen/person_fragment_headerView_size"
             android:layout_centerInParent="true"
@@ -175,7 +176,7 @@
             android:text="里   程"
             android:button="@null"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/sea_blue"
             android:textColor="@color/sea_blue"
             android:gravity="center_horizontal|center_vertical"
             />
@@ -185,8 +186,8 @@
             android:layout_height="match_parent"
             android:text="卡路里"
             android:layout_weight="1"
-            android:textColor="@android:color/white"
-            android:background="@color/sea_blue"
+            android:textColor="@color/sea_blue"
+            android:background="@color/white"
             android:gravity="center_horizontal|center_vertical"
             android:button="@null"
             />

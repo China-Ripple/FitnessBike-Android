@@ -28,4 +28,6 @@
 	<dimen name="login_and_register_top_textsize">16sp</dimen>
 	<dimen name="login_and_register_center_margin_top">85dp</dimen>
 	<dimen name="login_and_register_minheight">50dp</dimen>
+	
+	<dimen name="friend_listview_item_margin_left_right">15dp</dimen>
 </resources>

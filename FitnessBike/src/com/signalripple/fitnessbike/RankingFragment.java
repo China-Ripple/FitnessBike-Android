@@ -41,12 +41,14 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.fireup.yuanyang.adapter.NewsIndexAdapter;
@@ -74,6 +76,7 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 	private LoadMoreListView loadMoreListViewForAll=null;
 	private ImageView btnAddFriend;
 	private MRequset mRequset;
+	private RelativeLayout titlebar;
 	int page = 0;
 	
 	List<Object> listForFriend = new ArrayList<Object>();
@@ -85,6 +88,7 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 
 		viewList.add(inflater.inflate(R.layout.friend_list, null));
 		viewList.add(inflater.inflate(R.layout.allperson_list, null));
+		titlebar = (RelativeLayout)view.findViewById(R.id.titlebar_layout);
 		
 		// 初始化ListView还有其他
 		initOthers();
@@ -205,6 +209,8 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 		loadDataViewForFriend=(PullToRefreshList)viewList.get(0).findViewById(R.id.loaddataview);
 		loadDataViewForFriend.setCommViewListener(this);
 		loadMoreListViewForFriend=loadDataViewForFriend.getLoadMoreListView();
+		loadMoreListViewForFriend.setDivider(null);
+//		loadMoreListViewForFriend.setOnScrollListener(new ScrollListener());
 		
 		// 设置只能往左滑
 		loadMoreListViewForFriend.setSwipeMode(SwipeListView.SWIPE_MODE_LEFT);
@@ -218,14 +224,43 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 		loadDataViewForAll = (PullToRefreshList)viewList.get(1).findViewById(R.id.loaddataviewforall);
 		loadDataViewForAll.setCommViewListener(new CommViewListener());
 		loadMoreListViewForAll=loadDataViewForAll.getLoadMoreListView();
+		loadMoreListViewForAll.setDivider(null);
 		
 		// 设置只能往左滑
-		loadMoreListViewForFriend.setSwipeMode(SwipeListView.SWIPE_MODE_LEFT);
+		loadMoreListViewForAll.setSwipeMode(SwipeListView.SWIPE_MODE_LEFT);
 		
 		init();
 		adapterForAll = new FriendListViewAdapter(getActivity());
 		loadMoreListViewForAll.setAdapter(adapterForAll);
 		loadDataViewForAll.initData();
+	}
+	
+	class ScrollListener implements OnScrollListener
+	{
+		@Override
+		public void onScrollStateChanged(AbsListView view, int scrollState) {
+			// TODO Auto-generated method stub
+			 switch(scrollState){  
+		        case OnScrollListener.SCROLL_STATE_IDLE://空闲状态  
+		        	Log.i("XU", "空闲停止滑动状态");
+		        	titlebar.setAlpha(1);             
+		        	break;  
+		        case OnScrollListener.SCROLL_STATE_FLING://滚动状态  
+		        	Log.i("XU", "滑动状态");  
+		        	titlebar.setAlpha(0.1f);
+		            break;  
+		        case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL://触摸后滚动  
+		        	Log.i("XU", "触摸滑动状态");
+		            break;  
+		        }  
+		}
+
+		@Override
+		public void onScroll(AbsListView view, int firstVisibleItem,
+				int visibleItemCount, int totalItemCount) {
+			// TODO Auto-generated method stub
+			Log.i("XU", "一直滑动状态");
+		}
 	}
 
 	private void initEvent() {
@@ -384,24 +419,24 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 		if(checkedId == R.id.rbFriend)
 		{
 //			rbFriendList.setBackgroundResource(R.drawable.bg_buttons);
-			rbFriendList.setBackgroundColor(getResources().getColor(R.color.white));
-			rbFriendList.setTextColor(getResources().getColor(R.color.sea_blue));
+			rbFriendList.setBackgroundColor(getResources().getColor(R.color.sea_blue));
+			rbFriendList.setTextColor(getResources().getColor(R.color.white));
 			
 //			rbAllPerson.setBackgroundResource(android.R.color.transparent);
-			rbAllPerson.setBackgroundColor(getResources().getColor(R.color.sea_blue));
-			rbAllPerson.setTextColor(Color.WHITE);
+			rbAllPerson.setBackgroundColor(getResources().getColor(R.color.white));
+			rbAllPerson.setTextColor(getResources().getColor(R.color.sea_blue));
 			
 			viewPager.setCurrentItem(0, true);
 		}
 		else
 		{
 //			rbAllPerson.setBackgroundResource(R.drawable.bg_buttons);
-			rbAllPerson.setBackgroundColor(getResources().getColor(R.color.white));
-			rbAllPerson.setTextColor(getResources().getColor(R.color.sea_blue));
+			rbAllPerson.setBackgroundColor(getResources().getColor(R.color.sea_blue));
+			rbAllPerson.setTextColor(getResources().getColor(R.color.white));
 			
 //			rbFriendList.setBackgroundResource(android.R.color.transparent);
-			rbFriendList.setBackgroundColor(getResources().getColor(R.color.sea_blue));
-			rbFriendList.setTextColor(Color.WHITE);
+			rbFriendList.setBackgroundColor(getResources().getColor(R.color.white));
+			rbFriendList.setTextColor(getResources().getColor(R.color.sea_blue));
 			
 			viewPager.setCurrentItem(1, true);
 		}

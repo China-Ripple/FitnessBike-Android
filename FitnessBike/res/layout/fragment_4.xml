@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg" >
+    android:background="#dbdede"
+     >
+     <!-- android:background="@drawable/bg" -->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/black"
+        android:background="@color/custom_gray"
         android:layout_height="@dimen/titlebar_height" >
 
         <ImageView

@@ -81,56 +81,25 @@ public class PKAdapter extends MyBaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
-		holder.txtAccept.setOnClickListener(new ClickListener(API.ACCEPT,position));
-		holder.txtRefuse.setOnClickListener(new ClickListener(API.REFUSE,position));
+		holder.txtAccept.setOnClickListener(new ClickListener(API.ACCEPT,position,holder.txtAccept,holder.txtRefuse));
+		holder.txtRefuse.setOnClickListener(new ClickListener(API.REFUSE,position,holder.txtAccept,holder.txtRefuse));
 //		holder.btnPK.setOnClickListener(new PKButtonClickListener(position));
 		return convertView;
 	}
 	
 
-//	class PKButtonClickListener implements OnClickListener 
-//	{
-//		int position;
-//		
-//		public PKButtonClickListener(int position)
-//		{
-//			this.position = position;
-//		}
-//
-//		@Override
-//		public void onClick(View v) {
-//			// TODO Auto-generated method stub
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			PKBean pkBean = (PKBean) getItem(position);
-//			map.put("defierid", ShareDB.getStringFromDB(context, "account"));
-//			map.put("defenderid", pkBean.getDefierid());
-//			mRequset.requestForJsonObject(URLFactory.getURL(API.apiCompitition, map), null, new Listener<JSONObject>() {
-//
-//				@Override
-//				public void onResponse(JSONObject response) {
-//					// TODO Auto-generated method stub
-//					
-//				}
-//			}, new ErrorListener() {
-//
-//				@Override
-//				public void onErrorResponse(VolleyError error) {
-//					// TODO Auto-generated method stub
-//					Log.i("XU", "请求ak时错误"+error.toString());
-//				}
-//			});
-//		}
-//	}
-
 	class ClickListener implements OnClickListener 
 	{
 		int position;
 		int type;
+		TextView txtAccept,txtRefuse;
 		
-		public ClickListener(int type, int position)
+		public ClickListener(int type, int position, TextView txtAccept, TextView txtRefuse)
 		{
 			this.type = type;
 			this.position = position;
+			this.txtAccept = txtAccept;
+			this.txtRefuse = txtRefuse;
 		}
 
 		@Override
@@ -143,7 +112,7 @@ public class PKAdapter extends MyBaseAdapter {
 			map.put("uid", ShareDB.getStringFromDB(context, "account"));
 			map.put("msgid", pkBean.getId());
 			map.put("code", type);
-			deleteItem(position);
+//			deleteItem(position);
 //			getAlObjects().remove(position);
 //			notifyDataSetChanged();
 			mRequset.requestForJsonObject(URLFactory.getURL(API.apiMsgresponse, map), null, new Listener<JSONObject>() {
@@ -159,12 +128,14 @@ public class PKAdapter extends MyBaseAdapter {
 							{
 								Log.i("XU", "你已接受对方邀请");
 								ToastUtil.show(context, "你已接受对方请求", ToastUtil.INFO);
+								txtAccept.setText("已接受");
 							}
 							else 
 							{
 								Log.i("XU", "你已拒接对方邀请");
 								ToastUtil.show(context, "你已接拒接方请求", ToastUtil.INFO);
 								// todo : 拒绝之后只需把本条记录取消（删除隐藏）
+								txtRefuse.setText("已拒绝");
 							}
 						}
 					} catch (JSONException e) {

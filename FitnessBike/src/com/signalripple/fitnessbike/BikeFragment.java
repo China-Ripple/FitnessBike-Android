@@ -3,6 +3,8 @@ package com.signalripple.fitnessbike;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.signalripple.fitnessbike.api.BytesUtil;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -12,17 +14,47 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class BikeFragment extends Fragment implements OnPageChangeListener {
 
 	ViewPager viewPager;
 	List<View> viewList = new ArrayList<View>();
 	List<ImageView> selectPoint = new ArrayList<ImageView>();
+	private TextView txtKM;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_1, null);
+		
+		initViews(view,inflater);
+		
+		testByte();
+		
+		return view;
+	}
+	
+	
+
+	private void testByte() {
+		// TODO Auto-generated method stub
+		byte[] bytes = BytesUtil.int2Bytes(22, 8);
+//		byte b = bytes[0];
+		byte[] array = BytesUtil.getByteArray(bytes[0]);
+		
+//		
+		String  text = "";
+		for (int i = 0; i < array.length; i++) {
+			text += array[i]+"|";
+		}
+		
+		txtKM.setText(""+array.length+":"+text);
+	}
+
+
+	private void initViews(View view, LayoutInflater inflater) {
+		// TODO Auto-generated method stub
 		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
 		
 		selectPoint.add((ImageView) view.findViewById(R.id.point1));
@@ -36,7 +68,8 @@ public class BikeFragment extends Fragment implements OnPageChangeListener {
 		
 		viewPager.setAdapter(adapter);
 		viewPager.setOnPageChangeListener(this);
-		return view;
+		
+		txtKM = (TextView)view.findViewById(R.id.fragment_bike_km_value_text);
 	}
 
 	PagerAdapter adapter = new PagerAdapter() {

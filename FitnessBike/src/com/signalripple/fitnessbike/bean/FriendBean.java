@@ -14,6 +14,8 @@ public class FriendBean {
 	String name;
 	/**公里*/
 	String kilometre;
+	
+	
 	public String getId() {
 		return id;
 	}

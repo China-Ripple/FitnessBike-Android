@@ -145,6 +145,20 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity(), "出错的结果="+error.toString(), Toast.LENGTH_LONG).show();
 				Log.i("XU", "cuowu 请求结果--->"+error.toString());	
+				
+				listForFriend.add(new FriendBean());
+				listForFriend.add(new FriendBean());
+				listForFriend.add(new FriendBean());
+				listForFriend.add(new FriendBean());
+				listForFriend.add(new FriendBean());
+				listForFriend.add(new FriendBean());
+				listForFriend.add(new FriendBean());
+				listForFriend.add(new FriendBean());listForFriend.add(new FriendBean());listForFriend.add(new FriendBean());listForFriend.add(new FriendBean());
+				for (int i = 0; i < listForFriend.size(); i++) {
+					adapter.addItem(listForFriend.get(i));
+				}
+				
+				adapter.notifyDataSetChanged();
 			}
 		});
 			return listForFriend;
@@ -186,6 +200,20 @@ public class RankingFragment extends Fragment implements OnCheckedChangeListener
 				// TODO Auto-generated method stub
 				Toast.makeText(getActivity(), "出错的结果="+error.toString(), Toast.LENGTH_LONG).show();
 				Log.i("XU", "cuowu 请求结果--->"+error.toString());	
+				
+				listForAll.add(new FriendBean());
+				listForAll.add(new FriendBean());
+				listForAll.add(new FriendBean());
+				listForAll.add(new FriendBean());
+				listForAll.add(new FriendBean());
+				listForAll.add(new FriendBean());
+				listForAll.add(new FriendBean());
+				listForAll.add(new FriendBean());listForAll.add(new FriendBean());listForAll.add(new FriendBean());listForAll.add(new FriendBean());
+				for (int i = 0; i < listForAll.size(); i++) {
+					adapterForAll.addItem(listForAll.get(i));
+				}
+				
+				adapterForAll.notifyDataSetChanged();
 			}
 		});
 		

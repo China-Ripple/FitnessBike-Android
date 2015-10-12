@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.signalripple.fitnessbike.api.BytesUtil;
+import com.signalripple.fitnessbike.api.ParseByteData;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,17 +40,19 @@ public class BikeFragment extends Fragment implements OnPageChangeListener {
 
 	private void testByte() {
 		// TODO Auto-generated method stub
-		byte[] bytes = BytesUtil.int2Bytes(22, 8);
-//		byte b = bytes[0];
-		byte[] array = BytesUtil.getByteArray(bytes[0]);
+		
+		byte[] data = ParseByteData.sendMessage();
+		
+//		byte[] bytes = BytesUtil.int2Bytes(22, 8);
+//		byte[] array = BytesUtil.getByteArray(bytes[0]);
 		
 //		
 		String  text = "";
-		for (int i = 0; i < array.length; i++) {
-			text += array[i]+"|";
+		for (int i = 0; i < data.length; i++) {
+			text += data[i]+"\n";
 		}
 		
-		txtKM.setText(""+array.length+":"+text);
+//		txtKM.setText(""+array.length+":"+text);
 	}
 
 

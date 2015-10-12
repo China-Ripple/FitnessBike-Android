@@ -1,5 +1,6 @@
 package com.signalripple.fitnessbike.api;
 
+import android.text.format.Time;
 import android.util.Log;
 
 import com.signalripple.fitnessbike.bean.BlueToohDataNormal;
@@ -11,6 +12,45 @@ import com.signalripple.fitnessbike.bean.BlueToohDataSynch;
  */
 public class ParseByteData {
 
+	public static byte[] sendMessage()
+	{
+		byte[] data = new byte[10];
+		
+		Time time = new Time("GMT+8");
+		time.setToNow();
+		int year = Integer.valueOf(String.valueOf(time.year).substring(2, 3));
+		int month = time.month;
+		int day = time.monthDay;
+        int minute = time.minute;      
+        int hour = time.hour;      
+        int sec = time.second;  
+        
+        
+        String aa = Integer.toHexString(12);
+//      byte[] aaa = aa.getBytes();
+		
+		data[0] = (byte) 0xf0;
+		
+		// 年	test:15
+		data[1] = (byte)((data[1] & 0x7f) | year);  // 0000 0000;
+		// 月	test:10
+		data[2] = (byte)((data[2] & 0x7f) | month);
+		// 日	 test:10
+		data[3] = (byte)((data[3] & 0x7f) | day);
+		// 时	 test:14
+		data[4] = (byte)((data[4] & 0x7f) | hour);
+		// 分	 test:1
+		data[5] = (byte)((data[5] & 0x7f) | minute);
+		//协议尾
+		data[6] = (byte) 0xf1;
+		
+		for (int i = 0; i < data.length; i++) {
+			Log.i("XU", "data["+i+"]="+data[i]);
+		}
+		
+		return data;
+	}
+	
 	/**
 	 * 正常工作模式  ： 解析数据并填充尸体
 	 * @param data 通讯中从获取的字节数组   
@@ -22,7 +62,6 @@ public class ParseByteData {
 			return null;
 		
 		Log.i("XU", "数据长度："+data.length);
-		
 
 		// 骑行机状态
 		int bikeState = (data[1] >> 4) & 0x07;
@@ -35,7 +74,7 @@ public class ParseByteData {
 		// 数据同步模式
 		else if(bikeState == 2)
 		{
-			return synchronousMode();
+			return synchronousMode(data,bikeState);
 		}
 		
 		return null;
@@ -45,9 +84,26 @@ public class ParseByteData {
 	 * 数据同步模式
 	 * @return
 	 */
-	private static BlueToohDataSynch synchronousMode()
+	private static BlueToohDataSynch synchronousMode(byte[] data,int bikeState)
 	{
-		return new BlueToohDataSynch();
+		// 记录总数
+		int recodeCount = data[2] & 0x7f;
+		// 年月日时间日期
+		int year = data[3] & 0x7f;
+		int month = data[4] & 0x7f;
+		int day = data[5] & 0x7f;
+		// 阻力
+		int gear = data[6] & 0x0f;
+		// 特定RPM
+		float RPM = ((data[8] & 0x7f) << 7) | (data[7] & 0x7f);
+		// 运行时间
+		int timeInterval = ((data[10] & 0x7f) << 7) | (data[9] & 0x7f);
+		
+		BlueToohDataSynch blueToohDataSynch = new BlueToohDataSynch(bikeState, recodeCount, year, month, day, gear, timeInterval, RPM);
+		
+		Log.i("XU", "结果："+blueToohDataSynch.toString());
+		
+		return blueToohDataSynch;
 	}
 	
 	/**

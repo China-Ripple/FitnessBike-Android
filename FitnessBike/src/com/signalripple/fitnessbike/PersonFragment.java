@@ -126,11 +126,11 @@ public class PersonFragment extends Fragment implements OnCheckedChangeListener{
 		// TODO Auto-generated method stub
 		/// 初始化模拟数据
 		mileValue = new String[]{"300","200","123","324","225","126","97"};	
-		caloryValue = new String[]{"100","300","223","524","125","126","107"};	
+ 		caloryValue = new String[]{"100","300","223","524","125","126","107"};	
 	}
 
 	private void initViews(View view) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		radioGroup = (RadioGroup)view.findViewById(R.id.radiogroup);
 		radioGroup.setOnCheckedChangeListener(this);
 		rbCalory = (RadioButton)view.findViewById(R.id.rbCalori);

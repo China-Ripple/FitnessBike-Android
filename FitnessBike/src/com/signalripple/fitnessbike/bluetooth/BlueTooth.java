@@ -172,7 +172,8 @@ public class BlueTooth {
 	    BluetoothSocket socket;
 		try {
 			socket = device.createRfcommSocketToServiceRecord(uuid);
-			socket.connect();    
+			socket.connect();  
+//			socket.getInputStream().read(buffer);
 			Log.i("XU", "连接成功");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -182,9 +183,4 @@ public class BlueTooth {
 			Toast.makeText(context, "蓝牙连接异常:"+e.toString(), Toast.LENGTH_LONG).show();
 		}
 	}   
-	
-//	private Boolean connect_result = false;
-//	private BluetoothSocket bluetoothSocket = null;
-
-	
 }

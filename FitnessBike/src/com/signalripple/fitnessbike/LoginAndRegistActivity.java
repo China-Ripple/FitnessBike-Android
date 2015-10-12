@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.signalripple.fitnessbike.api.API;
+import com.signalripple.fitnessbike.api.ParseByteData;
 import com.signalripple.fitnessbike.bluetooth.BlueTooth;
 import com.signalripple.fitnessbike.utils.Activity2Activity;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
@@ -34,7 +35,6 @@ public class LoginAndRegistActivity extends BaseActivity implements OnClickListe
 		
 		initViews();
 		initEvent();
-		
 		//testBlueThooth();
 	}
 	
